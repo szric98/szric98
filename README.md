@@ -1,6 +1,6 @@
 ### Hello there 👋
 - I'm a fresh Computer Science Engineering graduate
-- My current focus is web development with technologies such as Javascript, Python, React and Node
+- My current focus is web development with technologies such as TypeScript, Python, React and Node
 - I'm currently learning Next.js and performance optimiziation of websites
 - I'm working on my portfolio website
 - I'm open to job opportunities and would like to get into open source
