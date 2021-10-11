@@ -1,7 +1,7 @@
 ### Hello there 👋
 - I'm a fresh Computer Science Engineering graduate
 - My current focus is web development with technologies such as TypeScript, Python, React and Node
-- I'm currently learning Next.js and performance optimiziation of websites
+- I'm currently learning Next.js, Firebase and React Native
 - I'm working on my portfolio website
 - I'm open to job opportunities and would like to get into open source
 - Fun fact: I'm an aspiring polyglot, I speak Hungarian, English, Japanese, studied German for 8 years (but I'm not using it much anymore, so I've become quite rusty) and I'm currently also learning French
