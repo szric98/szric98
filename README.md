@@ -1,7 +1,6 @@
 ### Hello there 👋
-- My current focus is web development with technologies such as TypeScript, React and Node
-- I'm currently learning Flutter
-- Fun fact: I'm an aspiring polyglot, I speak Hungarian, English, Japanese, studied German for 8 years and I'm learning French
+- I'm working with TypeScript, React, Node and Flutter
+- Fun fact: I'm an aspiring polyglot, I speak Hungarian, English, Japanese, French and currently learning Spanish
 
 <!--
 **szric98/szric98** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
