@@ -1,6 +1,6 @@
 ### Hello there 👋
 - I'm working with TypeScript, React, Node and Flutter
-- Fun fact: I'm an aspiring polyglot, I speak Hungarian, English, Japanese, French and currently learning Korean
+- Fun fact: I'm an aspiring polyglot, I speak Hungarian, English, Japanese and French
 
 <!--
 **szric98/szric98** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
