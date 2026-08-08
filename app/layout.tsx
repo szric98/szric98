@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { StarCursor } from "@/components/star-cursor";
+import { Starfield } from "@/components/starfield";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Richard Szabo",
   description:
-    "Working with TypeScript, React, Node and Flutter. Aspiring polyglot.",
+    "Full Stack Engineer with 5 years of experience building web applications and GraphQL APIs using modern AI tools and workflows.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -24,7 +26,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <Starfield />
+        <StarCursor />
+        {children}
+      </body>
     </html>
   );
 }
