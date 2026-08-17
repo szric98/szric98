@@ -218,14 +218,16 @@ export function Starfield() {
 
     window.addEventListener("resize", onResize);
 
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
     let animationFrameId = 0;
 
-    const animate = () => {
+    const animate = (timestamp: number) => {
       animationFrameId = requestAnimationFrame(animate);
+      timer.update(timestamp);
 
       if (!prefersReducedMotion) {
-        const delta = clock.getDelta();
+        const delta = timer.getDelta();
         rotateStars(heroStars, HERO_STAR_COUNT, delta);
         rotateStars(farStars, FAR_STAR_COUNT, delta);
       }
@@ -233,10 +235,11 @@ export function Starfield() {
       renderer.render(scene, camera);
     };
 
-    animate();
+    animate(performance.now());
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      timer.dispose();
       window.removeEventListener("resize", onResize);
       container.removeChild(renderer.domElement);
 

@@ -2,11 +2,11 @@
 
 :root {
   --background: #000000;
-  --foreground: #ededed;
+  --foreground: #f4f7f9;
   --star: #57707d;
   --star-bright: #b4d2dc;
   --hero-blue: #1a7fb8;
-  --hero-panel: rgb(9 15 26 / 0.12);
+  --hero-panel: rgb(8 12 18 / 0.28);
   --muted: #b5c8d2;
 }
 
@@ -19,6 +19,17 @@
   --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -80,16 +91,71 @@ body.star-cursor-active * {
     0 0 10px 3px rgb(180 210 225 / 0.8);
 }
 
-.text-gradient-hero {
-  background-image: linear-gradient(to right, #ffffff, var(--hero-blue));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .hero-panel {
   background-color: var(--hero-panel);
-  border: 1px solid rgb(255 255 255 / 0.12);
-  border-radius: 1rem;
-  backdrop-filter: blur(2px);
+  border: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.kicker {
+  display: block;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--hero-blue);
+}
+
+.hairline {
+  width: 4.5rem;
+  height: 1px;
+  background: rgb(255 255 255 / 0.28);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.25rem;
+  border: 1px solid transparent;
+  background: #fff;
+  color: #0a0d10;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.btn-primary:hover {
+  background: #dbeaf2;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.25rem;
+  border: 1px solid rgb(255 255 255 / 0.28);
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.btn-ghost:hover {
+  border-color: #fff;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  color: #d7e4ec;
+}
+
+.icon-btn:hover {
+  border-color: #fff;
+  color: #fff;
 }

@@ -102,6 +102,7 @@ export function HeroEarth({ className }: { className?: string }) {
     let animationFrameId = 0;
     let disposed = false;
     let resizeObserver: ResizeObserver | undefined;
+    let timer: THREE.Timer | undefined;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
@@ -292,15 +293,18 @@ export function HeroEarth({ className }: { className?: string }) {
         resizeObserver.observe(container);
         setReady(true);
 
-        const clock = new THREE.Clock();
+        const earthTimer = new THREE.Timer();
+        earthTimer.connect(document);
+        timer = earthTimer;
         const cloudDriftSpeed =
           EARTH_ROTATION_SPEED * (CLOUD_ROTATION_MULTIPLIER - 1);
 
-        const animate = () => {
+        const animate = (timestamp: number) => {
           animationFrameId = requestAnimationFrame(animate);
+          earthTimer.update(timestamp);
 
           if (!prefersReducedMotion && visible) {
-            const delta = clock.getDelta();
+            const delta = earthTimer.getDelta();
 
             if (!isDragging) {
               earthGroup.rotation.y += EARTH_ROTATION_SPEED * delta;
@@ -313,7 +317,7 @@ export function HeroEarth({ className }: { className?: string }) {
           renderer.render(scene, camera);
         };
 
-        animate();
+        animate(performance.now());
       } catch (error) {
         console.error("Failed to initialize HeroEarth:", error);
       }
@@ -322,6 +326,7 @@ export function HeroEarth({ className }: { className?: string }) {
     return () => {
       disposed = true;
       cancelAnimationFrame(animationFrameId);
+      timer?.dispose();
       document.removeEventListener("visibilitychange", onVisibilityChange);
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
@@ -382,7 +387,7 @@ export function HeroEarth({ className }: { className?: string }) {
           onClick={() =>
             setMode((prev) => (prev === "night" ? "day" : "night"))
           }
-          className="earth-mode-switch group relative flex items-center gap-2 rounded-full border border-white/20 bg-[rgb(9_15_26_/_0.55)] px-2 py-1.5 backdrop-blur-md transition-[border-color,box-shadow] hover:border-hero-blue/60 hover:shadow-[0_0_18px_rgb(26_127_184_/_0.35)] disabled:opacity-40"
+          className="earth-mode-switch group relative flex items-center gap-2 border border-white/20 bg-black/50 px-2 py-1.5 transition-colors hover:border-white disabled:opacity-40"
         >
           <span
             className={`font-mono text-[0.65rem] tracking-[0.18em] uppercase transition-colors ${
@@ -392,12 +397,12 @@ export function HeroEarth({ className }: { className?: string }) {
             Day
           </span>
 
-          <span className="relative h-5 w-10 rounded-full border border-white/15 bg-black/50">
+          <span className="relative h-5 w-10 border border-white/15 bg-black/50">
             <span
-              className={`absolute top-0.5 left-0.5 h-4 w-4 rounded-full transition-transform duration-300 ease-out ${
+              className={`absolute top-0.5 left-0.5 h-4 w-4 transition-transform duration-300 ease-out ${
                 isNight
-                  ? "translate-x-5 bg-hero-blue shadow-[0_0_10px_rgb(26_127_184_/_0.9)]"
-                  : "translate-x-0 bg-star-bright shadow-[0_0_10px_rgb(180_210_220_/_0.8)]"
+                  ? "translate-x-5 bg-hero-blue"
+                  : "translate-x-0 bg-star-bright"
               }`}
             />
           </span>
