@@ -1,9 +1,9 @@
+import { AboutSection } from "@/components/about-section";
 import { ExperienceTimeline } from "@/components/experience-timeline";
 import { HeroActions } from "@/components/hero-actions";
 import { HeroEarth } from "@/components/hero-earth";
 import { PageSection } from "@/components/page-section";
 import {
-  ABOUT_SECTION,
   EXPERIENCE_SECTION,
   HERO_SECTION,
   PROJECTS_SECTION,
@@ -17,9 +17,9 @@ export default function Home() {
         id="home"
         className="grid min-h-screen scroll-mt-28 items-center gap-8 px-8 pt-28 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-28 lg:pt-[18vh] xl:px-36"
       >
-        <div className="max-w-xl">
+        <div className="hero-copy-aurora max-w-xl">
           <p className="kicker">{HERO_SECTION.kicker}</p>
-          <h1 className="mt-3 text-[clamp(3rem,9vw,5.4rem)] font-medium tracking-[-0.06em] leading-[0.92] text-foreground">
+          <h1 className="mt-3 text-[clamp(3rem,9vw,5.4rem)] font-medium tracking-[-0.06em] leading-[0.92] text-foreground lg:whitespace-nowrap">
             {HERO_SECTION.name}
           </h1>
           <p className="mt-4 font-mono text-[0.82rem] tracking-[0.22em] text-star-bright uppercase">
@@ -39,18 +39,7 @@ export default function Home() {
         </div>
       </section>
 
-      <PageSection id="about" title={ABOUT_SECTION.title}>
-        <div className="max-w-3xl space-y-4">
-          {ABOUT_SECTION.paragraphs.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="text-[1.05rem] leading-[1.75] text-muted"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      </PageSection>
+      <AboutSection />
 
       <PageSection id="skills" title={SKILLS_SECTION.title}>
         <div className="grid max-w-4xl gap-6 sm:grid-cols-2">

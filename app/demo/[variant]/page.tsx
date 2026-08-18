@@ -1,21 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BackgroundHeroDemo } from "@/components/hero-demos/backgrounds";
 import { HERO_DEMO_VARIANTS } from "@/components/hero-demos/config";
-import { HudHero } from "@/components/hero-demos/hud";
-import { NeonHero } from "@/components/hero-demos/neon";
-import { OrbitalHero } from "@/components/hero-demos/orbital";
-import { SpecHero } from "@/components/hero-demos/spec";
 import { DemoSwitcher } from "@/components/hero-demos/switcher";
-import { TerminalHero } from "@/components/hero-demos/terminal";
 import { HERO_SECTION } from "@/copy";
-
-const VARIANT_PAGES = {
-  terminal: TerminalHero,
-  hud: HudHero,
-  neon: NeonHero,
-  spec: SpecHero,
-  orbital: OrbitalHero,
-} as const;
 
 export const dynamicParams = false;
 
@@ -45,16 +33,16 @@ export default async function DemoVariantPage({
   params: Promise<{ variant: string }>;
 }) {
   const { variant } = await params;
-  const Page = VARIANT_PAGES[variant as keyof typeof VARIANT_PAGES];
+  const meta = HERO_DEMO_VARIANTS.find((item) => item.slug === variant);
 
-  if (!Page) {
+  if (!meta) {
     notFound();
   }
 
   return (
     <>
       <DemoSwitcher current={variant} />
-      <Page />
+      <BackgroundHeroDemo variant={meta.slug} />
     </>
   );
 }

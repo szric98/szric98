@@ -38,8 +38,8 @@ export const SOCIAL_LINKS = [
 export const ABOUT_SECTION = {
   title: "About",
   paragraphs: [
-    "I'm a full-stack engineer with 5 years of experience building web applications and GraphQL APIs.",
-    "I focus on product features, performance, and keeping the stack maintainable — and I use modern AI tools as part of that workflow.",
+    "Hey, I'm Richard, a full-stack engineer from Budapest, Hungary. I'm passionate about building web applications with user-friendly interfaces, and high-performance APIs. I love coming up with simple, elegant, and efficient solutions to complex problems.",
+    "Lately, I've been especially interested in finding the middle ground between human and AI work; utilizing AI tools to enhance my workflow without displacing the critical thinking, and creativity that makes engineering so rewarding.",
   ],
 } as const;
 
@@ -48,19 +48,36 @@ export const SKILLS_SECTION = {
   groups: [
     {
       title: "Frontend",
-      items: ["React", "TypeScript", "Next.js", "Material UI"],
+      items: [
+        "JavaScript",
+        "TypeScript",
+        "HTML",
+        "CSS",
+        "Tailwind",
+        "React",
+        "Next.js",
+        "Figma",
+      ],
     },
     {
       title: "Backend",
-      items: ["Node", "Express", "GraphQL", "Apollo"],
+      items: ["TypeScript", "Python", "Node", "Express", "GraphQL"],
     },
     {
       title: "Mobile",
       items: ["Flutter"],
     },
     {
-      title: "Data & testing",
-      items: ["MongoDB", "Jest"],
+      title: "AI tools",
+      items: ["Claude", "Cursor", "Gemini"],
+    },
+    {
+      title: "Testing",
+      items: ["Jest", "Vitest", "Playwright", "Bruno"],
+    },
+    {
+      title: "Database",
+      items: ["MongoDB", "PostgreSQL", "Elasticsearch"],
     },
   ],
 } as const;
