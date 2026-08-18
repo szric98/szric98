@@ -25,11 +25,9 @@ export function SkillsOrbit() {
 
               return (
                 <li key={item} style={satStyle(item, angle)}>
-                  <div className="skills-orbit__sat">
-                    <div className="skills-orbit__sat-face">
-                      <SkillIcon name={item} mode="brand" />
-                      <span>{item}</span>
-                    </div>
+                  <div className="skills-orbit__sat-face">
+                    <SkillIcon name={item} mode="brand" />
+                    <span>{item}</span>
                   </div>
                 </li>
               );

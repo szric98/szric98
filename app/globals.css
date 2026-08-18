@@ -306,11 +306,15 @@ body.star-cursor-active * {
     rgb(5 9 15 / 0.62);
 }
 
-.skills-orbit__ring {
+.skills-orbit__ring,
+.skills-orbit__sats {
   position: absolute;
   inset: 18%;
-  border: 1px dashed rgb(180 210 220 / 0.22);
   border-radius: 50%;
+}
+
+.skills-orbit__ring {
+  border: 1px dashed rgb(180 210 220 / 0.22);
   pointer-events: none;
 }
 
@@ -338,8 +342,7 @@ body.star-cursor-active * {
 }
 
 .skills-orbit__sats {
-  position: absolute;
-  inset: 0;
+  z-index: 1;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -348,32 +351,28 @@ body.star-cursor-active * {
 
 .skills-orbit__sats li {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-}
-
-.skills-orbit__sat {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: rotate(var(--a)) translateY(-6.45rem) rotate(calc(var(--a) * -1));
+  inset: 0;
+  transform: rotate(var(--a));
 }
 
 .skills-orbit__sat-face {
+  position: absolute;
+  top: 0;
+  left: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.28rem;
-  width: 4.4rem;
-  margin-top: -1.2rem;
-  margin-left: -2.2rem;
+  width: max-content;
+  max-width: 5.6rem;
   color: rgb(213 226 233 / 0.9);
   font-size: 0.52rem;
   letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
+  translate: -50% -0.6rem;
+  rotate: calc(-1 * var(--a));
+  transform-origin: 50% 0.6rem;
   animation: skills-orbit-spin 72s linear infinite reverse;
 }
 
