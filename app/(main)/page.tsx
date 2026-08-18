@@ -3,12 +3,8 @@ import { ExperienceTimeline } from "@/components/experience-timeline";
 import { HeroActions } from "@/components/hero-actions";
 import { HeroEarth } from "@/components/hero-earth";
 import { PageSection } from "@/components/page-section";
-import {
-  EXPERIENCE_SECTION,
-  HERO_SECTION,
-  PROJECTS_SECTION,
-  SKILLS_SECTION,
-} from "@/copy";
+import { SkillsSection } from "@/components/skills-section";
+import { EXPERIENCE_SECTION, HERO_SECTION, PROJECTS_SECTION } from "@/copy";
 
 export default function Home() {
   return (
@@ -41,27 +37,7 @@ export default function Home() {
 
       <AboutSection />
 
-      <PageSection id="skills" title={SKILLS_SECTION.title}>
-        <div className="grid max-w-4xl gap-6 sm:grid-cols-2">
-          {SKILLS_SECTION.groups.map((group) => (
-            <article key={group.title} className="hero-panel px-6 py-6 sm:px-8">
-              <h3 className="font-mono text-[0.68rem] tracking-[0.22em] text-star-bright uppercase">
-                {group.title}
-              </h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="border border-white/16 px-3 py-1.5 font-mono text-xs tracking-wider text-muted uppercase"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </PageSection>
+      <SkillsSection />
 
       <PageSection id="experience" title={EXPERIENCE_SECTION.title}>
         <div className="max-w-3xl">

@@ -42,242 +42,624 @@
   background: rgb(255 255 255 / 0.2);
 }
 
-.hero-bg-demo {
+.skills-demo {
   position: relative;
   min-height: 100svh;
-  overflow: hidden;
 }
 
-.hero-bg-demo__header {
-  position: absolute;
-  inset: 1.4rem 2rem auto;
-  z-index: 10;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
-  color: rgb(181 200 210 / 0.7);
+.skills-demo__section {
+  width: min(100%, 76rem);
+  margin: 0 auto;
+  padding: 5.5rem 2rem 8.5rem;
+}
+
+.skills-demo__section h2 {
+  margin-top: 0.75rem;
+  color: var(--foreground);
+  font-size: clamp(2.4rem, 6vw, 3.75rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+.skills-demo__section .hairline {
+  margin-top: 1.5rem;
+}
+
+.skills-demo__blurb {
+  max-width: 38rem;
+  margin-top: 1.1rem;
+  color: rgb(181 200 210 / 0.72);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.skills-demo__stage {
+  margin-top: 2.75rem;
+}
+
+.skill-chip,
+.skills-cards__panel h3,
+.skills-stars__sky header,
+.skills-catalog,
+.skills-mosaic__group h3,
+.skills-readout,
+.skills-bento__cell h3 {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-.hero-bg-demo__nav {
+.skill-chip svg,
+.skills-stars__mark svg,
+.skills-catalog__row svg,
+.skills-mosaic__group li svg,
+.skills-readout li svg,
+.skills-bento__cell li svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* 01 / 02 — card grid with chips */
+
+.skills-cards {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.skills-cards__panel {
+  padding: 1.4rem 1.5rem 1.5rem;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: rgb(8 12 18 / 0.28);
+}
+
+.skills-cards__panel h3 {
+  margin: 0;
+  color: var(--star-bright);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.skills-cards__panel ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem 1.35rem;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.hero-bg-demo__nav-link {
-  color: rgb(181 200 210 / 0.62);
-  text-decoration: none;
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.72rem 0.42rem 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
 }
 
-.hero-bg-demo__nav-link:hover {
+.skill-chip svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.skill-chip--theme {
+  color: rgb(213 226 233 / 0.92);
+}
+
+.skill-chip--theme svg {
+  color: var(--star-bright);
+}
+
+.skill-chip--theme:hover {
+  border-color: rgb(255 255 255 / 0.55);
   color: #fff;
 }
 
-.hero-bg-demo__layout {
+.skill-chip--brand {
+  --skill-accent: var(--star-bright);
+}
+
+.skill-chip--brand:hover {
+  border-color: color-mix(in srgb, var(--skill-accent) 62%, white);
+  background: color-mix(in srgb, var(--skill-accent) 10%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--skill-accent) 22%, transparent);
+  color: #fff;
+}
+
+/* 03 — constellations */
+
+.skills-stars {
   display: grid;
-  min-height: 100svh;
-  align-items: center;
-  gap: 2rem;
-  padding: 6rem 2rem 8rem;
+  gap: 1.25rem;
 }
 
-.hero-bg-demo__copy-wrap {
-  position: relative;
-  isolation: isolate;
-  max-width: 38rem;
+.skills-stars__sky {
+  padding: 1.1rem 1.1rem 1.25rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background:
+    radial-gradient(ellipse at 50% 45%, rgb(26 127 184 / 0.08), transparent 58%),
+    rgb(5 9 15 / 0.55);
 }
 
-.hero-bg-demo__backdrop {
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.hero-bg-demo__copy {
-  position: relative;
-  padding: clamp(1.1rem, 2.2vw, 2rem);
-}
-
-.hero-bg-demo__copy h1 {
-  margin-top: 0.75rem;
-  color: var(--foreground);
-  font-size: clamp(3rem, 4.7vw, 5.4rem);
-  font-weight: 500;
-  letter-spacing: -0.06em;
-  line-height: 0.92;
-}
-
-.hero-bg-demo__role {
-  margin-top: 1rem;
-  color: var(--star-bright);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.82rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.hero-bg-demo__rule {
-  margin-top: 1.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.hero-bg-demo__description {
-  max-width: 32rem;
-  color: rgb(213 226 233 / 0.94);
-  font-size: 1.05rem;
-  line-height: 1.75;
-}
-
-.hero-bg-demo__earth {
+.skills-stars__sky header {
   display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.skills-stars__sky header span {
+  color: rgb(26 127 184 / 0.9);
+  font-size: 0.62rem;
+}
+
+.skills-stars__sky h3 {
+  margin: 0;
+  color: var(--star-bright);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.skills-stars__field {
+  position: relative;
+  min-height: 16.5rem;
+  margin-top: 0.4rem;
+}
+
+.skills-stars__lines {
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.skills-stars__lines line {
+  stroke: rgb(180 210 220 / 0.28);
+  stroke-width: 0.35;
+}
+
+.skills-stars__node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 4.6rem;
+  margin-left: -2.3rem;
+  margin-top: -1.35rem;
+  animation: skills-twinkle 4.8s ease-in-out infinite;
+}
+
+.skills-stars__mark {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-radius: 50%;
+  background: rgb(8 14 22 / 0.92);
+  box-shadow: 0 0 16px rgb(180 210 225 / 0.16);
+  color: var(--star-bright);
+}
+
+.skills-stars__mark svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.skills-stars__name {
+  color: rgb(213 226 233 / 0.88);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+/* 04 — observatory catalog */
+
+.skills-catalog {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.17);
+  background: rgb(5 9 15 / 0.72);
+  box-shadow: 0 2rem 6rem rgb(0 0 0 / 0.28);
+}
+
+.skills-catalog__corner {
+  position: absolute;
+  z-index: 2;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-color: rgb(180 210 220 / 0.75);
+}
+
+.skills-catalog__corner--tl {
+  top: 0.7rem;
+  left: 0.7rem;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.skills-catalog__corner--br {
+  right: 0.7rem;
+  bottom: 0.7rem;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.skills-catalog__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.25rem;
+  padding: 1.15rem 1.5rem 1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  color: rgb(181 200 210 / 0.58);
+  font-size: 0.62rem;
+}
+
+.skills-catalog ul {
+  margin: 0;
+  padding: 0.25rem 0 0.6rem;
+  list-style: none;
+}
+
+.skills-catalog__row {
+  display: grid;
+  grid-template-columns: 4.2rem 1.2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.7rem 0.85rem;
+  padding: 0.72rem 1.5rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  color: rgb(226 236 241 / 0.9);
+  font-size: 0.68rem;
+}
+
+.skills-catalog__row:last-child {
+  border-bottom: 0;
+}
+
+.skills-catalog__row svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--star-bright);
+}
+
+.skills-catalog__id {
+  color: rgb(26 127 184 / 0.95);
+}
+
+.skills-catalog__name {
+  letter-spacing: 0.14em;
+}
+
+.skills-catalog__class,
+.skills-catalog__status {
+  display: none;
+  color: rgb(181 200 210 / 0.58);
+}
+
+.skills-catalog__status {
+  color: var(--star-bright);
+}
+
+/* 06 — instrument mosaic */
+
+.skills-mosaic {
+  display: grid;
+  gap: 2rem;
+}
+
+.skills-mosaic__group h3 {
+  margin: 0 0 0.85rem;
+  color: var(--star-bright);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.skills-mosaic__group ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.6rem, 1fr));
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills-mosaic__group li {
+  --skill-accent: var(--star-bright);
+
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.7rem;
+  min-height: 6.6rem;
+  padding: 0.9rem 0.5rem 0.8rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(8 12 18 / 0.42);
+  color: rgb(213 226 233 / 0.86);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
-.hero-bg-demo__earth p {
-  margin-top: 1rem;
-  color: var(--muted);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+.skills-mosaic__group li svg {
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
+.skills-mosaic__group li:hover {
+  border-color: color-mix(in srgb, var(--skill-accent) 70%, white);
+  background: color-mix(in srgb, var(--skill-accent) 12%, rgb(8 12 18 / 0.55));
+  box-shadow: 0 0 22px color-mix(in srgb, var(--skill-accent) 24%, transparent);
+}
+
+/* 07 — telemetry */
+
+.skills-readout {
+  display: grid;
+  gap: 1rem;
+}
+
+.skills-readout__panel {
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(5 9 15 / 0.68);
+}
+
+.skills-readout__panel header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.85rem 1.15rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
   font-size: 0.62rem;
-  letter-spacing: 0.32em;
+}
+
+.skills-readout__panel header span:first-child {
+  color: rgb(26 127 184 / 0.95);
+}
+
+.skills-readout__panel h3 {
+  margin: 0;
+  color: var(--star-bright);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.skills-readout__lock {
+  margin-left: auto;
+  color: rgb(181 200 210 / 0.55);
+}
+
+.skills-readout__panel ul {
+  margin: 0;
+  padding: 0.35rem 0 0.45rem;
+  list-style: none;
+}
+
+.skills-readout__panel li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 1.15rem;
+  color: rgb(226 236 241 / 0.9);
+  font-size: 0.68rem;
+}
+
+.skills-readout__panel li svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--star-bright);
+}
+
+.skills-readout__name {
+  flex: 0 1 auto;
+  letter-spacing: 0.14em;
+}
+
+.skills-readout__leader {
+  flex: 1 1 auto;
+  min-width: 1.5rem;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgb(255 255 255 / 0.22) 18%,
+    transparent 0
+  );
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+.skills-readout__freq {
+  color: rgb(181 200 210 / 0.62);
+  font-variant-numeric: tabular-nums;
+}
+
+.skills-readout__live {
+  color: var(--star-bright);
+}
+
+.skills-readout__live::before {
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  background: #7ee0a3;
+  box-shadow: 0 0 8px rgb(126 224 163 / 0.8);
+  vertical-align: 0.05rem;
+  content: "";
+}
+
+/* 08 — payload bay / bento */
+
+.skills-bento {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.skills-bento__cell {
+  padding: 1.25rem 1.3rem 1.35rem;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: rgb(8 12 18 / 0.42);
+}
+
+.skills-bento__cell--frontend {
+  background:
+    radial-gradient(ellipse at 18% 20%, rgb(26 127 184 / 0.16), transparent 48%),
+    rgb(8 12 18 / 0.5);
+}
+
+.skills-bento__cell h3 {
+  margin: 0 0 1rem;
+  color: var(--star-bright);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.skills-bento__cell ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills-bento__cell li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.7rem 0.4rem 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  color: rgb(213 226 233 / 0.9);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-/* 01 — A directional wash that dissolves completely into the page. */
-.hero-bg-demo--veil .hero-bg-demo__backdrop {
-  inset: -8% -12% -8% -5%;
-  background: linear-gradient(
-    90deg,
-    rgb(3 7 12 / 0.82),
-    rgb(5 10 17 / 0.58) 62%,
-    transparent
-  );
-  filter: blur(18px);
+.skills-bento__cell li svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--star-bright);
 }
 
-/* 02 — A compact halo with no rectangular silhouette. */
-.hero-bg-demo--halo .hero-bg-demo__backdrop {
-  inset: -25% -18%;
-  background: radial-gradient(
-    ellipse at 42% 48%,
-    rgb(2 6 11 / 0.94) 0%,
-    rgb(3 8 14 / 0.72) 44%,
-    transparent 74%
-  );
-  filter: blur(10px);
+.skills-bento__cell--frontend li {
+  padding: 0.5rem 0.8rem 0.5rem 0.55rem;
+  font-size: 0.72rem;
 }
 
-/* 03 — True backdrop blur, softened by a radial mask. */
-.hero-bg-demo--frost .hero-bg-demo__backdrop {
-  inset: -16% -10%;
-  background: rgb(8 14 22 / 0.24);
-  backdrop-filter: blur(12px) saturate(72%);
-  mask-image: radial-gradient(ellipse, #000 38%, transparent 76%);
+.skills-bento__cell--frontend li svg {
+  width: 1.05rem;
+  height: 1.05rem;
 }
 
-/* 04 — Atmospheric layers rather than a single panel. */
-.hero-bg-demo--mist .hero-bg-demo__backdrop {
-  inset: -28% -20%;
-  background:
-    radial-gradient(circle at 22% 38%, rgb(26 127 184 / 0.18), transparent 34%),
-    radial-gradient(circle at 62% 68%, rgb(4 9 16 / 0.9), transparent 48%),
-    radial-gradient(circle at 38% 48%, rgb(3 7 12 / 0.84), transparent 64%);
-  filter: blur(24px);
-}
+@keyframes skills-twinkle {
+  0%,
+  100% {
+    opacity: 0.78;
+  }
 
-/* 05 — A cinematic pool of shadow concentrated at the lower left. */
-.hero-bg-demo--vignette .hero-bg-demo__backdrop {
-  inset: -18% -15%;
-  background: radial-gradient(
-    ellipse at 28% 68%,
-    rgb(0 2 6 / 0.98),
-    rgb(3 7 12 / 0.72) 46%,
-    transparent 76%
-  );
-  filter: blur(16px);
-}
-
-/* 06 — A restrained diagonal beam that follows the orbital theme. */
-.hero-bg-demo--beam .hero-bg-demo__backdrop {
-  inset: -35% -30%;
-  background: linear-gradient(
-    118deg,
-    transparent 12%,
-    rgb(26 127 184 / 0.08) 28%,
-    rgb(3 8 14 / 0.82) 44%,
-    rgb(3 8 14 / 0.68) 62%,
-    transparent 78%
-  );
-  filter: blur(20px);
-  transform: rotate(-2deg);
-}
-
-/* 07 — Nearly invisible treatment: blur and dim only what sits behind text. */
-.hero-bg-demo--quiet .hero-bg-demo__backdrop {
-  inset: -8% -4%;
-  background: rgb(0 3 8 / 0.16);
-  backdrop-filter: blur(4px) brightness(55%);
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 12%,
-    #000 76%,
-    transparent
-  );
-}
-
-/* 08 — A blue-tinted ambient glow that still reads as part of the starfield. */
-.hero-bg-demo--aurora .hero-bg-demo__backdrop {
-  inset: -38% -28%;
-  background:
-    radial-gradient(ellipse at 35% 45%, rgb(26 127 184 / 0.2), transparent 46%),
-    radial-gradient(ellipse at 52% 62%, rgb(2 6 12 / 0.9), transparent 66%);
-  filter: blur(30px);
+  50% {
+    opacity: 1;
+  }
 }
 
 @media (min-width: 640px) {
   .demo-switcher__rule {
     display: block;
   }
+
+  .skills-cards,
+  .skills-stars,
+  .skills-readout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-catalog__row {
+    grid-template-columns: 4.4rem 1.2rem minmax(0, 1.2fr) minmax(0, 0.8fr) 5.5rem;
+  }
+
+  .skills-catalog__class,
+  .skills-catalog__status {
+    display: block;
+  }
+
+  .skills-catalog__status {
+    text-align: right;
+  }
 }
 
-@media (min-width: 768px) {
-  .hero-bg-demo__layout {
-    padding-right: 4rem;
-    padding-left: 4rem;
+@media (min-width: 760px) {
+  .skills-demo__section {
+    padding-right: 3.5rem;
+    padding-left: 3.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .skills-bento {
+    grid-template-columns: 1.35fr 1fr 1fr;
+    grid-template-areas:
+      "frontend backend ai-tools"
+      "frontend testing database"
+      "frontend mobile mobile";
+  }
+
+  .skills-bento__cell--frontend {
+    grid-area: frontend;
+  }
+
+  .skills-bento__cell--backend {
+    grid-area: backend;
+  }
+
+  .skills-bento__cell--ai-tools {
+    grid-area: ai-tools;
+  }
+
+  .skills-bento__cell--testing {
+    grid-area: testing;
+  }
+
+  .skills-bento__cell--database {
+    grid-area: database;
+  }
+
+  .skills-bento__cell--mobile {
+    grid-area: mobile;
   }
 }
 
 @media (min-width: 1024px) {
-  .hero-bg-demo__layout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 4rem;
-    padding-right: 7rem;
-    padding-left: 7rem;
-  }
-
-  .hero-bg-demo__copy h1 {
-    white-space: nowrap;
-  }
-}
-
-@media (min-width: 1280px) {
-  .hero-bg-demo__layout {
-    padding-right: 9rem;
-    padding-left: 9rem;
+  .skills-demo__section {
+    padding-right: 4.5rem;
+    padding-left: 4.5rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .demo-switcher a {
+  .demo-switcher a,
+  .skill-chip,
+  .skills-mosaic__group li {
     transition: none;
+  }
+
+  .skills-stars__node {
+    animation: none;
   }
 }
