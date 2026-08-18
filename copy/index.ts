@@ -107,12 +107,14 @@ export const EXPERIENCE_SECTION = {
       startDate: "Apr 2023",
       endDate: "Apr 2024",
       location: "Budapest, Hungary (remote)",
+      stack: "React, TypeScript, Next.js, Vercel, Capacitor, Axios, Formik",
       highlights: [
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.",
-        "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.",
-        "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
-        "Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur.",
+        "Was entrusted with taking over and fixing the codebase of a job-search website",
+        "In the first three weeks, fixed over 100 bugs and stabilized the website so the client could present it at an important event",
+        "Introduced the client to KANBAN, created ticket templates, set up automatic deployments and error checks",
+        "Fixed over 500 TypeScript errors, extracted repeating patterns and improved code consistency",
+        "Worked on Search Engine Optimization (SEO): improved page structure, added meta tags, worked with Meta Pixel",
+        "Incrementally rewrote most of the website according to new requirements",
       ],
     },
     {
@@ -122,7 +124,7 @@ export const EXPERIENCE_SECTION = {
       endDate: "Mar 2023",
       location: "London, United Kingdom (remote)",
       stack:
-        "React, Typescript, Jest, Node, Apollo, GraphQL, Material UI, Express, MongoDB, Flutter",
+        "React, Typescript, Jest, Node, Apollo GraphQL, Material UI, Express, MongoDB, Flutter",
       highlights: [
         "Worked at a fast-paced startup in an international SCRUM team",
         "Developed 30+ full-stack features with React and Node",
