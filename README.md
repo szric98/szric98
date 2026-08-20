@@ -8,17 +8,27 @@ Hey, I'm **Richard**, a **full-stack engineer** from Budapest, Hungary. I'm pass
 
 Lately, I've been especially interested in finding the middle ground between human and AI work; utilizing AI tools to enhance my workflow without displacing the critical thinking, and creativity that makes engineering so rewarding.
 
-<!--
-**szric98/szric98** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<p align="center">
+  <a href="https://www.linkedin.com/in/szric98"><img src="public/readme/connect-linkedin.svg" alt="LinkedIn" height="44" /></a>
+  &nbsp;&nbsp;
+  <a href="mailto:sz.richard98@gmail.com"><img src="public/readme/connect-email.svg" alt="Email" height="44" /></a>
+  &nbsp;&nbsp;
+  <a href="https://leetcode.com/u/szric98/"><img src="public/readme/connect-leetcode.svg" alt="LeetCode" height="44" /></a>
+</p>
 
-Here are some ideas to get you started:
+## Skills
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+<p align="center">
+  <img src="public/readme/skills-frontend.png" alt="Frontend" width="30%" />
+  &nbsp;
+  <img src="public/readme/skills-backend.png" alt="Backend" width="30%" />
+  &nbsp;
+  <img src="public/readme/skills-mobile.png" alt="Mobile" width="30%" />
+</p>
+<p align="center">
+  <img src="public/readme/skills-ai-tools.png" alt="AI tools" width="30%" />
+  &nbsp;
+  <img src="public/readme/skills-testing.png" alt="Testing" width="30%" />
+  &nbsp;
+  <img src="public/readme/skills-database.png" alt="Database" width="30%" />
+</p>

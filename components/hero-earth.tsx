@@ -313,7 +313,8 @@ export function HeroEarth({ className }: { className?: string }) {
     container.appendChild(canvas);
 
     const earthGroup = new THREE.Group();
-    earthGroup.rotation.y = 3.6;
+    earthGroup.rotation.y = 4;
+    earthGroup.rotation.x = 0.25;
     scene.add(earthGroup);
 
     const sunDirectionLocal = new THREE.Vector3();
