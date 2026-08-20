@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/readme-banners/readme-banner-01-earth.png" alt="Richard Szabo — Full Stack Engineer" width="100%" />
+  <img src="public/readme/banner.avif" alt="Richard Szabo — Full Stack Engineer" width="100%" />
 </p>
 
 ### Hello there 👋
