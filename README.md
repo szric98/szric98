@@ -2,9 +2,11 @@
   <img src="public/readme/banner.avif" alt="Richard Szabo — Full Stack Engineer" width="100%" />
 </p>
 
-### Hello there 👋
-- I'm working with TypeScript, React, Node and Flutter
-- Fun fact: I'm an aspiring polyglot, I speak Hungarian, English, Japanese and French
+## About
+
+Hey, I'm **Richard**, a **full-stack engineer** from Budapest, Hungary. I'm passionate about building web applications with user-friendly interfaces, and high-performance APIs. I love coming up with simple, elegant, and efficient solutions to complex problems.
+
+Lately, I've been especially interested in finding the middle ground between human and AI work; utilizing AI tools to enhance my workflow without displacing the critical thinking, and creativity that makes engineering so rewarding.
 
 <!--
 **szric98/szric98** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
