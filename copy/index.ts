@@ -3,7 +3,6 @@ export const HERO_SECTION = {
   role: "Full Stack Engineer",
   kicker: "engineer",
   mark: "szabo · earth",
-  earthCaption: "night side · live",
   description:
     "Full Stack Engineer with 5 years of experience building web applications and GraphQL APIs using modern AI tools.",
 } as const;

@@ -10,7 +10,14 @@ const MAX_RENDER_SIZE = 1024;
 const DRAG_SENSITIVITY = 0.005;
 const MAX_POLAR_TILT = 1.1;
 
-type EarthMode = "day" | "night";
+/** Smoothstep half-width for the terminator, in n·l units (~7°). */
+const TWILIGHT_WIDTH = 0.12;
+const SUN_INTENSITY = 2.8;
+const AMBIENT_INTENSITY = 0.08;
+const EMISSIVE_INTENSITY = 2.2;
+const SPECULAR_SHININESS = 25;
+const DAY_CLOUD_OPACITY = 0.8;
+const NIGHT_CLOUD_OPACITY = 0.22;
 
 const atmosphereVertexShader = /* glsl */ `
   varying vec3 vNormal;
@@ -25,6 +32,137 @@ const atmosphereFragmentShader = /* glsl */ `
   void main() {
     float intensity = pow(0.65 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.2);
     gl_FragColor = vec4(0.35, 0.65, 1.0, 1.0) * intensity;
+  }
+`;
+
+const earthVertexShader = /* glsl */ `
+  attribute vec4 tangent;
+
+  varying vec2 vUv;
+  varying vec3 vWorldNormal;
+  varying vec3 vWorldTangent;
+  varying vec3 vWorldBitangent;
+  varying vec3 vWorldPosition;
+
+  void main() {
+    vUv = uv;
+
+    vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+    vWorldPosition = worldPosition.xyz;
+
+    mat3 worldMatrix = mat3(modelMatrix);
+    vWorldNormal = normalize(worldMatrix * normal);
+    vWorldTangent = normalize(worldMatrix * tangent.xyz);
+    vWorldBitangent = normalize(
+      cross(vWorldNormal, vWorldTangent) * tangent.w
+    );
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const earthFragmentShader = /* glsl */ `
+  uniform sampler2D dayMap;
+  uniform sampler2D nightMap;
+  uniform sampler2D normalMap;
+  uniform sampler2D specularMap;
+  uniform vec3 sunDirection;
+  uniform vec2 normalScale;
+  uniform float twilightWidth;
+  uniform float sunIntensity;
+  uniform float ambientIntensity;
+  uniform vec3 emissiveColor;
+  uniform float emissiveIntensity;
+  uniform float shininess;
+  uniform vec3 specularColor;
+
+  varying vec2 vUv;
+  varying vec3 vWorldNormal;
+  varying vec3 vWorldTangent;
+  varying vec3 vWorldBitangent;
+  varying vec3 vWorldPosition;
+
+  void main() {
+    vec3 geometricNormal = normalize(vWorldNormal);
+    vec3 tangent = normalize(vWorldTangent);
+    vec3 bitangent = normalize(vWorldBitangent);
+
+    vec3 mapNormal = texture2D(normalMap, vUv).xyz * 2.0 - 1.0;
+    mapNormal.xy *= normalScale;
+    vec3 normal = normalize(
+      mat3(tangent, bitangent, geometricNormal) * mapNormal
+    );
+
+    vec3 sunDir = normalize(sunDirection);
+    float dayFactor = smoothstep(
+      -twilightWidth,
+      twilightWidth,
+      dot(geometricNormal, sunDir)
+    );
+    float diffuse = max(dot(normal, sunDir), 0.0);
+
+    vec3 dayColor = texture2D(dayMap, vUv).rgb;
+    vec3 nightColor = texture2D(nightMap, vUv).rgb;
+    vec3 albedo = mix(nightColor, dayColor, dayFactor);
+
+    vec3 lit = albedo * (ambientIntensity + sunIntensity * diffuse);
+
+    vec3 viewDir = normalize(cameraPosition - vWorldPosition);
+    vec3 halfDir = normalize(sunDir + viewDir);
+    float specMask = texture2D(specularMap, vUv).r;
+    float spec = pow(max(dot(normal, halfDir), 0.0), shininess) * specMask * diffuse;
+    vec3 specular = specularColor * spec * sunIntensity;
+
+    vec3 emissive =
+      nightColor * emissiveColor * emissiveIntensity * (1.0 - dayFactor);
+
+    vec3 color = lit + specular + emissive;
+
+    #ifdef TONE_MAPPING
+      color = toneMapping(color);
+    #endif
+
+    gl_FragColor = linearToOutputTexel(vec4(color, 1.0));
+  }
+`;
+
+const cloudVertexShader = /* glsl */ `
+  varying vec2 vUv;
+  varying vec3 vWorldNormal;
+
+  void main() {
+    vUv = uv;
+    vWorldNormal = normalize(mat3(modelMatrix) * normal);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const cloudFragmentShader = /* glsl */ `
+  uniform sampler2D cloudMap;
+  uniform vec3 sunDirection;
+  uniform float twilightWidth;
+  uniform float dayOpacity;
+  uniform float nightOpacity;
+
+  varying vec2 vUv;
+  varying vec3 vWorldNormal;
+
+  void main() {
+    vec3 normal = normalize(vWorldNormal);
+    vec3 sunDir = normalize(sunDirection);
+    float facing = dot(normal, sunDir);
+    float dayFactor = smoothstep(-twilightWidth, twilightWidth, facing);
+
+    vec4 cloud = texture2D(cloudMap, vUv);
+    float alpha = cloud.a * mix(nightOpacity, dayOpacity, dayFactor);
+    float light = 0.35 + 0.65 * max(facing, 0.0);
+    vec3 color = cloud.rgb * light;
+
+    #ifdef TONE_MAPPING
+      color = toneMapping(color);
+    #endif
+
+    gl_FragColor = linearToOutputTexel(vec4(color, alpha));
   }
 `;
 
@@ -47,48 +185,100 @@ function loadTexture(
   });
 }
 
-function applyEarthMode(
-  mode: EarthMode,
-  material: THREE.MeshPhongMaterial,
-  maps: { day: THREE.Texture; night: THREE.Texture },
-  ambientLight: THREE.AmbientLight,
-  sunLight: THREE.DirectionalLight,
-  cloudMaterial: THREE.MeshPhongMaterial,
-) {
-  if (mode === "night") {
-    material.map = maps.night;
-    material.emissiveMap = maps.night;
-    material.emissive.set(0xffe0b0);
-    material.emissiveIntensity = 2.4;
-    ambientLight.intensity = 0.55;
-    sunLight.intensity = 0.9;
-    cloudMaterial.opacity = 0.25;
-  } else {
-    material.map = maps.day;
-    material.emissiveMap = null;
-    material.emissive.set(0x000000);
-    material.emissiveIntensity = 0;
-    ambientLight.intensity = 0.85;
-    sunLight.intensity = 3.2;
-    cloudMaterial.opacity = 0.8;
-  }
-  material.needsUpdate = true;
+function wrapRadians(angle: number): number {
+  return Math.atan2(Math.sin(angle), Math.cos(angle));
+}
+
+/**
+ * NOAA solar-calculator approximation: subsolar latitude is the
+ * declination (Earth's axial tilt), longitude follows UTC + equation of time.
+ */
+function getSubsolarPoint(date: Date): { lat: number; lon: number } {
+  const utcHours =
+    date.getUTCHours() +
+    date.getUTCMinutes() / 60 +
+    date.getUTCSeconds() / 3600 +
+    date.getUTCMilliseconds() / 3_600_000;
+
+  const yearStart = Date.UTC(date.getUTCFullYear(), 0, 1);
+  const dayOfYear = (date.getTime() - yearStart) / 86_400_000 + 1;
+  const gamma = ((2 * Math.PI) / 365) * (dayOfYear - 1 + (utcHours - 12) / 24);
+
+  const eqTimeMinutes =
+    229.18 *
+    (0.000075 +
+      0.001868 * Math.cos(gamma) -
+      0.032077 * Math.sin(gamma) -
+      0.014615 * Math.cos(2 * gamma) -
+      0.040849 * Math.sin(2 * gamma));
+
+  const declination =
+    0.006918 -
+    0.399912 * Math.cos(gamma) +
+    0.070257 * Math.sin(gamma) -
+    0.006758 * Math.cos(2 * gamma) +
+    0.000907 * Math.sin(2 * gamma) -
+    0.002697 * Math.cos(3 * gamma) +
+    0.00148 * Math.sin(3 * gamma);
+
+  const longitude = wrapRadians(
+    THREE.MathUtils.degToRad(-15 * (utcHours - 12) - eqTimeMinutes / 4),
+  );
+
+  return { lat: declination, lon: longitude };
+}
+
+/**
+ * Object-space sun direction for Three's SphereGeometry + equirectangular maps:
+ * +Y is north, +X is lon 0°, +Z is lon 90°W.
+ */
+function setSunDirectionFromDate(date: Date, target: THREE.Vector3): void {
+  const { lat, lon } = getSubsolarPoint(date);
+  const cosLat = Math.cos(lat);
+  target
+    .set(cosLat * Math.cos(lon), Math.sin(lat), -cosLat * Math.sin(lon))
+    .normalize();
+}
+
+function formatUtcTimestamp(date: Date): string {
+  const year = String(date.getUTCFullYear());
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const hours = String(date.getUTCHours()).padStart(2, "0");
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
+}
+
+function EarthLiveCaption() {
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const tick = () => setNow(new Date());
+    tick();
+    const intervalId = window.setInterval(tick, 1000);
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  return (
+    <p className="mt-4 text-center font-mono text-[0.62rem] tracking-[0.18em] text-muted tabular-nums uppercase">
+      <time dateTime={now?.toISOString()}>
+        {now ? formatUtcTimestamp(now) : "----.--.--T--:--:--Z"}
+      </time>
+      <span className="text-muted/50"> · </span>
+      <span className="inline-flex items-center gap-1.5 text-star-bright">
+        <span
+          className="size-1.5 shrink-0 rounded-full bg-red-500"
+          aria-hidden
+        />
+        LIVE
+      </span>
+    </p>
+  );
 }
 
 export function HeroEarth({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mode, setMode] = useState<EarthMode>("night");
-  const [ready, setReady] = useState(false);
-
-  const materialRef = useRef<THREE.MeshPhongMaterial | null>(null);
-  const cloudMaterialRef = useRef<THREE.MeshPhongMaterial | null>(null);
-  const ambientLightRef = useRef<THREE.AmbientLight | null>(null);
-  const sunLightRef = useRef<THREE.DirectionalLight | null>(null);
-  const mapsRef = useRef<{ day: THREE.Texture; night: THREE.Texture } | null>(
-    null,
-  );
-  const modeRef = useRef<EarthMode>(mode);
-  modeRef.current = mode;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -122,18 +312,13 @@ export function HeroEarth({ className }: { className?: string }) {
     canvas.style.touchAction = "none";
     container.appendChild(canvas);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
-    scene.add(ambientLight);
-    ambientLightRef.current = ambientLight;
-
-    const sunLight = new THREE.DirectionalLight(0xffffff, 3.2);
-    sunLight.position.set(5, 3, 5);
-    scene.add(sunLight);
-    sunLightRef.current = sunLight;
-
     const earthGroup = new THREE.Group();
     earthGroup.rotation.y = 3.6;
     scene.add(earthGroup);
+
+    const sunDirectionLocal = new THREE.Vector3();
+    const sunDirectionWorld = new THREE.Vector3();
+    setSunDirectionFromDate(new Date(), sunDirectionLocal);
 
     const disposables: Array<
       THREE.BufferGeometry | THREE.Material | THREE.Texture
@@ -225,21 +410,32 @@ export function HeroEarth({ className }: { className?: string }) {
         }
 
         disposables.push(dayMap, nightMap, normalMap, specularMap, cloudMap);
-        mapsRef.current = { day: dayMap, night: nightMap };
 
         const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
+        earthGeometry.computeTangents();
         disposables.push(earthGeometry);
 
-        const earthMaterial = new THREE.MeshPhongMaterial({
-          map: nightMap,
-          normalMap,
-          normalScale: new THREE.Vector2(0.85, 0.85),
-          specularMap,
-          specular: new THREE.Color(0x333333),
-          shininess: 25,
+        const earthMaterial = new THREE.ShaderMaterial({
+          uniforms: {
+            dayMap: { value: dayMap },
+            nightMap: { value: nightMap },
+            normalMap: { value: normalMap },
+            specularMap: { value: specularMap },
+            sunDirection: { value: sunDirectionWorld },
+            normalScale: { value: new THREE.Vector2(0.85, 0.85) },
+            twilightWidth: { value: TWILIGHT_WIDTH },
+            sunIntensity: { value: SUN_INTENSITY },
+            ambientIntensity: { value: AMBIENT_INTENSITY },
+            emissiveColor: { value: new THREE.Color(0xffe0b0) },
+            emissiveIntensity: { value: EMISSIVE_INTENSITY },
+            shininess: { value: SPECULAR_SHININESS },
+            specularColor: { value: new THREE.Color(0x333333) },
+          },
+          vertexShader: earthVertexShader,
+          fragmentShader: earthFragmentShader,
+          glslVersion: THREE.GLSL1,
         });
         disposables.push(earthMaterial);
-        materialRef.current = earthMaterial;
 
         const earth = new THREE.Mesh(earthGeometry, earthMaterial);
         earthGroup.add(earth);
@@ -247,14 +443,21 @@ export function HeroEarth({ className }: { className?: string }) {
         const cloudGeometry = new THREE.SphereGeometry(1.008, 64, 64);
         disposables.push(cloudGeometry);
 
-        const cloudMaterial = new THREE.MeshPhongMaterial({
-          map: cloudMap,
+        const cloudMaterial = new THREE.ShaderMaterial({
+          uniforms: {
+            cloudMap: { value: cloudMap },
+            sunDirection: { value: sunDirectionWorld },
+            twilightWidth: { value: TWILIGHT_WIDTH },
+            dayOpacity: { value: DAY_CLOUD_OPACITY },
+            nightOpacity: { value: NIGHT_CLOUD_OPACITY },
+          },
+          vertexShader: cloudVertexShader,
+          fragmentShader: cloudFragmentShader,
           transparent: true,
-          opacity: 0.8,
           depthWrite: false,
+          glslVersion: THREE.GLSL1,
         });
         disposables.push(cloudMaterial);
-        cloudMaterialRef.current = cloudMaterial;
 
         const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
         earthGroup.add(clouds);
@@ -279,25 +482,23 @@ export function HeroEarth({ className }: { className?: string }) {
         );
         earthGroup.add(atmosphere);
 
-        applyEarthMode(
-          modeRef.current,
-          earthMaterial,
-          mapsRef.current,
-          ambientLight,
-          sunLight,
-          cloudMaterial,
-        );
-
         resize();
         resizeObserver = new ResizeObserver(resize);
         resizeObserver.observe(container);
-        setReady(true);
 
         const earthTimer = new THREE.Timer();
         earthTimer.connect(document);
         timer = earthTimer;
         const cloudDriftSpeed =
           EARTH_ROTATION_SPEED * (CLOUD_ROTATION_MULTIPLIER - 1);
+
+        const updateSun = () => {
+          setSunDirectionFromDate(new Date(), sunDirectionLocal);
+          earthGroup.updateMatrixWorld();
+          sunDirectionWorld
+            .copy(sunDirectionLocal)
+            .transformDirection(earthGroup.matrixWorld);
+        };
 
         const animate = (timestamp: number) => {
           animationFrameId = requestAnimationFrame(animate);
@@ -314,6 +515,7 @@ export function HeroEarth({ className }: { className?: string }) {
             clouds.rotation.y += cloudDriftSpeed * delta;
           }
 
+          updateSun();
           renderer.render(scene, camera);
         };
 
@@ -333,13 +535,6 @@ export function HeroEarth({ className }: { className?: string }) {
       canvas.removeEventListener("pointerup", onPointerUp);
       canvas.removeEventListener("pointercancel", onPointerUp);
       resizeObserver?.disconnect();
-      setReady(false);
-
-      materialRef.current = null;
-      cloudMaterialRef.current = null;
-      ambientLightRef.current = null;
-      sunLightRef.current = null;
-      mapsRef.current = null;
 
       if (canvas.parentNode === container) {
         container.removeChild(canvas);
@@ -353,21 +548,6 @@ export function HeroEarth({ className }: { className?: string }) {
     };
   }, []);
 
-  useEffect(() => {
-    const material = materialRef.current;
-    const maps = mapsRef.current;
-    const ambientLight = ambientLightRef.current;
-    const sunLight = sunLightRef.current;
-    const cloudMaterial = cloudMaterialRef.current;
-    if (!material || !maps || !ambientLight || !sunLight || !cloudMaterial) {
-      return;
-    }
-
-    applyEarthMode(mode, material, maps, ambientLight, sunLight, cloudMaterial);
-  }, [mode]);
-
-  const isNight = mode === "night";
-
   return (
     <div className={`relative ${className ?? ""}`}>
       <div
@@ -375,47 +555,7 @@ export function HeroEarth({ className }: { className?: string }) {
         aria-hidden
         className="aspect-square cursor-grab overflow-hidden active:cursor-grabbing"
       />
-
-      <div className="absolute right-1 bottom-1 z-10 sm:right-2 sm:bottom-2">
-        <button
-          type="button"
-          disabled={!ready}
-          aria-pressed={isNight}
-          aria-label={
-            isNight ? "Switch Earth to day mode" : "Switch Earth to night mode"
-          }
-          onClick={() =>
-            setMode((prev) => (prev === "night" ? "day" : "night"))
-          }
-          className="earth-mode-switch group relative flex items-center gap-2 border border-white/20 bg-black/50 px-2 py-1.5 transition-colors hover:border-white disabled:opacity-40"
-        >
-          <span
-            className={`font-mono text-[0.65rem] tracking-[0.18em] uppercase transition-colors ${
-              !isNight ? "text-star-bright" : "text-muted/70"
-            }`}
-          >
-            Day
-          </span>
-
-          <span className="relative h-5 w-10 border border-white/15 bg-black/50">
-            <span
-              className={`absolute top-0.5 left-0.5 h-4 w-4 transition-transform duration-300 ease-out ${
-                isNight
-                  ? "translate-x-5 bg-hero-blue"
-                  : "translate-x-0 bg-star-bright"
-              }`}
-            />
-          </span>
-
-          <span
-            className={`font-mono text-[0.65rem] tracking-[0.18em] uppercase transition-colors ${
-              isNight ? "text-hero-blue" : "text-muted/70"
-            }`}
-          >
-            Night
-          </span>
-        </button>
-      </div>
+      <EarthLiveCaption />
     </div>
   );
 }

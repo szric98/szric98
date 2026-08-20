@@ -29,9 +29,6 @@ export default function Home() {
         </div>
         <div className="flex w-full flex-col items-center justify-center">
           <HeroEarth className="w-full max-w-[18rem] sm:max-w-sm lg:max-w-md xl:max-w-lg" />
-          <p className="mt-4 font-mono text-[0.62rem] tracking-[0.32em] text-muted uppercase">
-            {HERO_SECTION.earthCaption}
-          </p>
         </div>
       </section>
 
