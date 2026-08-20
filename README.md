@@ -8,6 +8,8 @@ Hey, I'm **Richard**, a **full-stack engineer** from Budapest, Hungary. I'm pass
 
 Lately, I've been especially interested in finding the middle ground between human and AI work; utilizing AI tools to enhance my workflow without displacing the critical thinking, and creativity that makes engineering so rewarding.
 
+## Links
+
 <p align="center">
   <a href="https://www.linkedin.com/in/szric98"><img src="public/readme/connect-linkedin.svg" alt="LinkedIn" height="44" /></a>
   &nbsp;&nbsp;
