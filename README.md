@@ -3,11 +3,11 @@
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/szric98"><img src="public/readme/connect-linkedin.svg" alt="LinkedIn" height="44" /></a>
+  <a href="https://www.linkedin.com/in/szric98" target="_blank"><img src="public/readme/connect-linkedin.svg" alt="LinkedIn" height="44" /></a>
   &nbsp;&nbsp;
-  <a href="mailto:sz.richard98@gmail.com"><img src="public/readme/connect-email.svg" alt="Email" height="44" /></a>
+  <a href="mailto:sz.richard98@gmail.com" target="_blank"><img src="public/readme/connect-email.svg" alt="Email" height="44" /></a>
   &nbsp;&nbsp;
-  <a href="https://leetcode.com/u/szric98/"><img src="public/readme/connect-leetcode.svg" alt="LeetCode" height="44" /></a>
+  <a href="https://leetcode.com/u/szric98/" target="_blank"><img src="public/readme/connect-leetcode.svg" alt="LeetCode" height="44" /></a>
 </p>
 
 ## About
