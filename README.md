@@ -2,14 +2,6 @@
   <img src="public/readme/banner.avif" alt="Richard Szabo — Full Stack Engineer" width="100%" />
 </p>
 
-## About
-
-Hey, I'm **Richard**, a **full-stack engineer** from Budapest, Hungary. I'm passionate about building web applications with user-friendly interfaces, and high-performance APIs. I love coming up with simple, elegant, and efficient solutions to complex problems.
-
-Lately, I've been especially interested in finding the middle ground between human and AI work; utilizing AI tools to enhance my workflow without displacing the critical thinking, and creativity that makes engineering so rewarding.
-
-## Links
-
 <p align="center">
   <a href="https://www.linkedin.com/in/szric98"><img src="public/readme/connect-linkedin.svg" alt="LinkedIn" height="44" /></a>
   &nbsp;&nbsp;
@@ -17,6 +9,12 @@ Lately, I've been especially interested in finding the middle ground between hum
   &nbsp;&nbsp;
   <a href="https://leetcode.com/u/szric98/"><img src="public/readme/connect-leetcode.svg" alt="LeetCode" height="44" /></a>
 </p>
+
+## About
+
+Hey, I'm **Richard**, a **full-stack engineer** from Budapest, Hungary. I'm passionate about building web applications with user-friendly interfaces, and high-performance APIs. I love coming up with simple, elegant, and efficient solutions to complex problems.
+
+Lately, I've been especially interested in finding the middle ground between human and AI work; utilizing AI tools to enhance my workflow without displacing the critical thinking, and creativity that makes engineering so rewarding.
 
 ## Skills
 
