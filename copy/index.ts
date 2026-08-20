@@ -149,18 +149,6 @@ export const PROJECTS_SECTION = {
         "A Chrome extension that helps you pause before visiting distracting websites. All data stays in your browser.",
       stack: "Chrome Extension",
     },
-    {
-      title: "Lorem Project",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      stack: "React, TypeScript, Node",
-    },
-    {
-      title: "Ipsum App",
-      description:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      stack: "Flutter, GraphQL",
-    },
   ],
 } as const;
 
