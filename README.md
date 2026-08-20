@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/readme-banners/readme-banner-01-earth.png" alt="Richard Szabo — Full Stack Engineer" width="100%" />
+</p>
+
 ### Hello there 👋
 - I'm working with TypeScript, React, Node and Flutter
 - Fun fact: I'm an aspiring polyglot, I speak Hungarian, English, Japanese and French
