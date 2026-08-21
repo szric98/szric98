@@ -162,7 +162,11 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-black/70 to-transparent px-8 pt-6 pb-8 md:px-16 lg:px-28 xl:px-36">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 bg-linear-to-b px-8 pt-6 pb-8 md:from-black/70 md:to-transparent md:px-16 lg:px-28 xl:px-36 ${
+        open ? "from-black/95 to-black/85" : "from-black/70 to-transparent"
+      }`}
+    >
       <div className="flex items-center justify-between gap-6">
         <Link
           href="/"
@@ -212,7 +216,7 @@ export function SiteHeader() {
         </button>
       </div>
 
-      {open ? (
+      {open && (
         <nav
           id="mobile-nav"
           className="mt-4 flex flex-col gap-3 border-t border-white/16 pt-4 md:hidden"
@@ -220,7 +224,7 @@ export function SiteHeader() {
         >
           {renderNavLinks()}
         </nav>
-      ) : null}
+      )}
     </header>
   );
 }
