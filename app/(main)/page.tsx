@@ -28,7 +28,7 @@ export default function Home() {
           <HeroActions />
         </div>
         <div className="flex w-full flex-col items-center justify-center">
-          <HeroEarth className="w-full max-w-[18rem] sm:max-w-sm lg:max-w-md xl:max-w-lg" />
+          <HeroEarth className="w-full max-w-100 lg:max-w-md xl:max-w-lg" />
         </div>
       </section>
 
