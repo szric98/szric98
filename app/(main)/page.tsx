@@ -11,7 +11,7 @@ export default function Home() {
     <main className="relative">
       <section
         id="home"
-        className="grid min-h-screen scroll-mt-28 items-center gap-8 px-8 pt-28 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-28 lg:pt-[18vh] xl:px-36"
+        className="grid min-h-screen scroll-mt-28 items-center gap-8 px-8 pt-28 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-28 lg:pt-[18vh] xl:px-36 overflow-x-clip"
       >
         <div className="hero-copy-aurora max-w-xl">
           <p className="kicker">{HERO_SECTION.kicker}</p>
