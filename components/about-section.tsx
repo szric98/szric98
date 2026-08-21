@@ -5,7 +5,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-28 px-8 py-24 md:px-16 lg:px-28 lg:py-32 xl:px-36"
+      className="scroll-mt-28 px-8 py-12 md:px-16 lg:px-28 lg:py-16 xl:px-36"
     >
       <div className="about-split">
         <div className="about-split__portrait-wrap">

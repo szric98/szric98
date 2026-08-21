@@ -1,0 +1,34 @@
+---
+description: Dark-theme color tokens — never invent nearby RGB/hex
+alwaysApply: true
+---
+
+# Dark theme tokens
+
+Primitives live in `app/globals.css` `:root`. Do not add hues or one-off RGB.
+
+| Token | Hex | Role |
+|---|---|---|
+| `--background` | `#000000` | Canvas |
+| `--surface` | `#080c12` | Glass / card fill |
+| `--foreground` | `#f4f7f9` | Primary ink |
+| `--muted` | `#b5c8d2` | Secondary ink |
+| `--star` | `#57707d` | Dim star (starfield `0x57707d`) |
+| `--star-bright` | `#b4d2dc` | Lit star / labels |
+| `--accent` | `#1a7fb8` | Brand accent |
+
+Derived: `--hairline` (foreground 16%), `--hero-panel` (surface 28%).
+
+Tint with `color-mix(in srgb, var(--accent) 16%, transparent)`. Alphas only: **12 / 16 / 28 / 55 / 70 / 90**. Tailwind: `text-muted`, `border-hairline`, `text-accent`.
+
+```css
+/* BAD */
+color: rgb(181 200 210 / 0.58);
+border: 1px solid rgb(255 255 255 / 0.17);
+
+/* GOOD */
+color: color-mix(in srgb, var(--muted) 55%, transparent);
+border: 1px solid var(--hairline);
+```
+
+Exceptions: solid white on `.btn-primary` and the cursor core; demo live-dot `#7ee0a3`; `app/mindfully/` light theme; official skill-icon brand hexes.

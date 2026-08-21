@@ -219,7 +219,7 @@ export function SiteHeader() {
       {open && (
         <nav
           id="mobile-nav"
-          className="mt-4 flex flex-col gap-3 border-t border-white/16 pt-4 md:hidden"
+          className="mt-4 flex flex-col gap-3 border-t border-hairline pt-4 md:hidden"
           aria-label="Main"
         >
           {renderNavLinks()}

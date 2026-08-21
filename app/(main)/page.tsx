@@ -13,7 +13,7 @@ export default function Home() {
         id="home"
         className="grid min-h-screen scroll-mt-28 items-center gap-8 px-8 pt-28 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-28 lg:pt-[18vh] xl:px-36 overflow-x-clip"
       >
-        <div className="hero-copy-aurora max-w-xl">
+        <div className="hero-copy-aurora lg:max-w-xl">
           <p className="kicker">{HERO_SECTION.kicker}</p>
           <h1 className="mt-3 text-[clamp(3rem,9vw,5.4rem)] font-medium tracking-[-0.06em] leading-[0.92] text-foreground lg:whitespace-nowrap">
             {HERO_SECTION.name}
@@ -22,7 +22,7 @@ export default function Home() {
             {HERO_SECTION.role}
           </p>
           <div className="hairline mt-6 mb-5" />
-          <p className="max-w-lg text-[1.05rem] leading-[1.75] text-muted">
+          <p className="text-[1.05rem] leading-[1.75] text-muted lg:max-w-lg">
             {HERO_SECTION.description}
           </p>
           <HeroActions />

@@ -68,11 +68,11 @@ export function brandHex(name: string) {
   const icon = ICONS[name];
 
   if (!icon) {
-    return "#b4d2dc";
+    return "var(--star-bright)";
   }
 
   if (luminance(icon.hex) < 36) {
-    return "#f4f7f9";
+    return "var(--foreground)";
   }
 
   return `#${icon.hex}`;

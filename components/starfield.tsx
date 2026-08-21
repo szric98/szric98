@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 const STAR_COUNT = 6000;
 const STAR_SPREAD = 2000;
-const STAR_COLOR = 0x57707d; // rgb(87, 112, 125)
+const STAR_COLOR = 0x57707d; // matches --star in app/globals.css
 const FAR_STAR_WORLD_SIZE = 3;
 const HERO_STAR_WORLD_SIZE = 4.5;
 const MAX_STAR_SIZE_CSS_PX = 24;

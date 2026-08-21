@@ -10,10 +10,7 @@ export function PageSection({
   children: ReactNode;
 }) {
   return (
-    <section
-      id={id}
-      className="scroll-mt-28 px-8 py-24 md:px-16 lg:px-28 lg:py-32 xl:px-36"
-    >
+    <section id={id} className="px-8 py-12 md:px-16 lg:px-28 lg:py-16 xl:px-36">
       <p className="kicker">{title}</p>
       <h2 className="mt-3 text-4xl font-medium tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl">
         {title}

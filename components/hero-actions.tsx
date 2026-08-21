@@ -60,7 +60,7 @@ export function HeroActions() {
       <a href="#projects" className="btn-ghost">
         {CONTACT_SECTION.projectsButton}
       </a>
-      <div className="flex items-center gap-2 sm:ml-auto">
+      <div className="flex items-center gap-2 ml-auto">
         {SOCIAL_LINKS.map((link) => {
           const Icon = SOCIAL_ICONS[link.icon];
           const external = link.href.startsWith("http");

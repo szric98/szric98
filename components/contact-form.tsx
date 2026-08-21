@@ -4,7 +4,7 @@ import { type FormEvent, useState } from "react";
 import { CONTACT_SECTION } from "@/copy";
 
 const fieldClassName =
-  "mt-2 block w-full border border-white/16 bg-transparent px-4 py-2.5 font-sans text-base tracking-normal text-foreground normal-case outline-none transition-colors placeholder:text-muted/50 focus:border-white";
+  "mt-2 block w-full border border-hairline bg-transparent px-4 py-2.5 font-sans text-base tracking-normal text-foreground normal-case outline-none transition-colors placeholder:text-muted/50 focus:border-foreground";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
