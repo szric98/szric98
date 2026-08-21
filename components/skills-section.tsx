@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { PageSection } from "@/components/page-section";
-import { brandHex, SkillIcon } from "@/components/skills-demos/icons";
+import { brandHex, SkillIcon } from "@/components/skill-icons";
 import { SKILLS_SECTION } from "@/copy";
 
 function satStyle(name: string, degrees: number): CSSProperties {
@@ -26,7 +26,7 @@ export function SkillsOrbit() {
               return (
                 <li key={item} style={satStyle(item, angle)}>
                   <div className="skills-orbit__sat-face">
-                    <SkillIcon name={item} mode="brand" />
+                    <SkillIcon name={item} />
                     <span>{item}</span>
                   </div>
                 </li>

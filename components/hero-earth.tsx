@@ -261,14 +261,14 @@ function EarthLiveCaption() {
   }, []);
 
   return (
-    <p className="mt-4 text-center font-mono text-[0.62rem] tracking-[0.18em] text-muted tabular-nums uppercase">
+    <p className="label-meta mt-4 text-center text-muted tabular-nums">
       <time dateTime={now?.toISOString()}>
         {now ? formatUtcTimestamp(now) : "----.--.--T--:--:--Z"}
       </time>
       <span className="text-muted/50"> · </span>
       <span className="inline-flex items-center gap-1.5 text-star-bright">
         <span
-          className="size-1.5 shrink-0 rounded-full bg-red-500"
+          className="size-1.5 shrink-0 rounded-full bg-accent"
           aria-hidden
         />
         LIVE

@@ -31,4 +31,4 @@ color: color-mix(in srgb, var(--muted) 55%, transparent);
 border: 1px solid var(--hairline);
 ```
 
-Exceptions: solid white on `.btn-primary` and the cursor core; demo live-dot `#7ee0a3`; `app/mindfully/` light theme; official skill-icon brand hexes.
+Exceptions: solid white on `.btn-primary` and the cursor core; `app/mindfully/` light theme; official skill-icon brand hexes.

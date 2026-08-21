@@ -24,8 +24,6 @@ import {
   siVitest,
 } from "simple-icons";
 
-export type IconMode = "theme" | "brand";
-
 const ICONS: Record<string, SimpleIcon> = {
   JavaScript: siJavascript,
   TypeScript: siTypescript,
@@ -78,33 +76,14 @@ export function brandHex(name: string) {
   return `#${icon.hex}`;
 }
 
-function PlaywrightMark({ mode }: { mode: IconMode }) {
-  const left = mode === "brand" ? "#45BA4B" : "currentColor";
-  const mid = mode === "brand" ? "#E8C547" : "currentColor";
-  const right = mode === "brand" ? "#D14B8F" : "currentColor";
-  const eye = mode === "brand" ? "#1b1b1d" : "var(--background)";
-
+function PlaywrightMark() {
   return (
     <>
-      <ellipse
-        cx="7.4"
-        cy="12"
-        rx="5.1"
-        ry="6.3"
-        fill={left}
-        opacity={mode === "theme" ? 0.45 : 1}
-      />
-      <ellipse
-        cx="16.6"
-        cy="12"
-        rx="5.1"
-        ry="6.3"
-        fill={right}
-        opacity={mode === "theme" ? 0.7 : 1}
-      />
-      <ellipse cx="12" cy="13.1" rx="5.4" ry="6.5" fill={mid} />
-      <circle cx="10.15" cy="12.4" r="0.85" fill={eye} />
-      <circle cx="13.85" cy="12.4" r="0.85" fill={eye} />
+      <ellipse cx="7.4" cy="12" rx="5.1" ry="6.3" fill="#45BA4B" />
+      <ellipse cx="16.6" cy="12" rx="5.1" ry="6.3" fill="#D14B8F" />
+      <ellipse cx="12" cy="13.1" rx="5.4" ry="6.5" fill="#E8C547" />
+      <circle cx="10.15" cy="12.4" r="0.85" fill="#1b1b1d" />
+      <circle cx="13.85" cy="12.4" r="0.85" fill="#1b1b1d" />
     </>
   );
 }
@@ -138,11 +117,9 @@ function FigmaMark() {
 
 export function SkillIcon({
   name,
-  mode,
   className,
 }: {
   name: string;
-  mode: IconMode;
   className?: string;
 }) {
   if (name === "Playwright") {
@@ -153,12 +130,12 @@ export function SkillIcon({
         className={className}
         focusable="false"
       >
-        <PlaywrightMark mode={mode} />
+        <PlaywrightMark />
       </svg>
     );
   }
 
-  if (name === "Figma" && mode === "brand") {
+  if (name === "Figma") {
     return (
       <svg
         aria-hidden="true"
@@ -184,10 +161,7 @@ export function SkillIcon({
       className={className}
       focusable="false"
     >
-      <path
-        d={icon.path}
-        fill={mode === "theme" ? "currentColor" : brandHex(name)}
-      />
+      <path d={icon.path} fill={brandHex(name)} />
     </svg>
   );
 }

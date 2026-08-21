@@ -11,18 +11,18 @@ export default function Home() {
     <main className="relative">
       <section
         id="home"
-        className="grid min-h-screen scroll-mt-28 items-center gap-8 px-8 pt-28 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-28 lg:pt-[18vh] xl:px-36 overflow-x-clip"
+        className="page-gutter page-offset grid min-h-screen scroll-mt-28 items-center gap-8 overflow-x-clip lg:grid-cols-2 lg:gap-16"
       >
         <div className="hero-copy-aurora lg:max-w-xl">
           <p className="kicker">{HERO_SECTION.kicker}</p>
-          <h1 className="mt-3 text-[clamp(3rem,9vw,5.4rem)] font-medium tracking-[-0.06em] leading-[0.92] text-foreground lg:whitespace-nowrap">
+          <h1 className="mt-3 text-[clamp(3rem,9vw,5.5rem)] font-medium tracking-display leading-[0.9] text-foreground lg:whitespace-nowrap">
             {HERO_SECTION.name}
           </h1>
-          <p className="mt-4 font-mono text-[0.82rem] tracking-[0.22em] text-star-bright uppercase">
+          <p className="label-meta mt-4 text-star-bright">
             {HERO_SECTION.role}
           </p>
           <div className="hairline mt-6 mb-5" />
-          <p className="text-[1.05rem] leading-[1.75] text-muted lg:max-w-lg">
+          <p className="text-body text-muted lg:max-w-lg">
             {HERO_SECTION.description}
           </p>
           <HeroActions />
@@ -56,10 +56,10 @@ export default function Home() {
               <h3 className="text-xl font-medium tracking-tight text-foreground">
                 {project.title}
               </h3>
-              <p className="mt-3 text-base leading-relaxed text-muted">
+              <p className="mt-3 text-body text-muted">
                 {project.description}
               </p>
-              <p className="mt-4 font-mono text-[0.68rem] tracking-[0.18em] text-star-bright uppercase">
+              <p className="label-meta mt-4 text-star-bright">
                 {project.stack}
               </p>
             </article>

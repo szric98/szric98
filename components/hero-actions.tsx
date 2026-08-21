@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CONTACT_SECTION, SOCIAL_LINKS } from "@/copy";
 
-const iconClassName = "h-[1.15rem] w-[1.15rem]";
+const iconClassName = "h-5 w-5";
 
 function GitHubIcon() {
   return (

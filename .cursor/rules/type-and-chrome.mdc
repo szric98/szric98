@@ -1,0 +1,29 @@
+---
+description: Type and page chrome tokens — no one-off rem/em sizes
+alwaysApply: true
+---
+
+# Type and page chrome
+
+Primitives live in `app/globals.css` `:root`. Do not invent `text-[0.xxrem]` or `tracking-[0.xxem]`.
+
+| Token | Value | Role |
+|---|---|---|
+| `--text-micro` | `0.5rem` | Dense UI (orbit, tiny meta) |
+| `--text-label` | `0.75rem` | Kickers, nav, buttons, mono labels |
+| `--text-body` | `1rem` | Body copy |
+| `--tracking-kicker` | `0.3em` | `.kicker` and the header mark |
+| `--tracking-label` | `0.2em` | Other uppercase mono |
+| `--tracking-display` | `-0.05em` | Headings |
+
+Classes: `.kicker`, `.label-meta`, `.page-gutter`, `.page-offset`. Headings: `SectionHeading` (`h1`/`h2` + hairline). Hero name may use `clamp(3rem, 9vw, 5.5rem)`.
+
+```tsx
+// BAD
+<p className="font-mono text-[0.68rem] tracking-[0.18em] uppercase">
+
+// GOOD
+<p className="label-meta text-star-bright">
+```
+
+Tailwind: `text-label`, `text-body`, `tracking-display`. Breakpoints in custom CSS: `640` / `768` / `1024` / `1280` (plus `1440` only for the 6-col orbit).

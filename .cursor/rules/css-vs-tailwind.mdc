@@ -1,0 +1,21 @@
+---
+description: Shared visual atoms in CSS; unique layout in Tailwind
+alwaysApply: true
+---
+
+# CSS vs Tailwind
+
+Dark site only (`app/mindfully/` is a separate light page).
+
+- **Shared atoms** (used in more than one place, or by custom CSS widgets): a named class in `app/globals.css`. Examples: `.kicker`, `.label-meta`, `.page-gutter`, `.btn-primary`, `.hero-panel`, `.about-split`, `.skills-orbit`.
+- **Unique layout** (one component’s grid, flex, spacing): Tailwind utilities.
+- Never re-specify a CSS class as arbitrary values (`text-[0.75rem]` instead of `.label-meta` / `text-label`).
+- Color and type tokens stay in `:root`. Mix opacity with `color-mix`; do not add nearby hex or rem.
+
+```tsx
+// BAD — duplicate of .page-gutter
+<section className="px-8 md:px-16 lg:px-28 xl:px-36">
+
+// GOOD
+<section className="page-gutter py-12 lg:py-16">
+```

@@ -42,7 +42,7 @@ function NavLink({
     <Link
       href={href}
       scroll={typeof href !== "object"}
-      className={`font-mono text-[0.68rem] tracking-[0.2em] uppercase transition-colors ${
+      className={`label-meta transition-colors ${
         isActive ? "text-foreground" : "text-muted/70 hover:text-foreground"
       }`}
       onClick={onClick}
@@ -163,14 +163,14 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 bg-linear-to-b px-8 pt-6 pb-8 md:from-black/70 md:to-transparent md:px-16 lg:px-28 xl:px-36 ${
-        open ? "from-black/95 to-black/85" : "from-black/70 to-transparent"
+      className={`page-gutter fixed inset-x-0 top-0 z-50 bg-linear-to-b pt-6 pb-8 md:from-background/70 md:to-transparent ${
+        open ? "from-background/90 to-background/85" : "from-background/70 to-transparent"
       }`}
     >
       <div className="flex items-center justify-between gap-6">
         <Link
           href="/"
-          className="font-mono text-[0.68rem] tracking-[0.32em] text-muted uppercase"
+          className="label-meta tracking-kicker text-muted"
         >
           {HERO_SECTION.mark}
         </Link>

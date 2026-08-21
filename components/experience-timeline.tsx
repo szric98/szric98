@@ -66,10 +66,10 @@ export function ExperienceTimeline({
     <div className="relative grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-6 gap-y-10 md:grid-cols-[5.5rem_minmax(0,1fr)] md:gap-x-10">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-8 bottom-8 left-[2.25rem] w-px -translate-x-1/2 bg-white/20 md:left-[2.75rem]"
+        className="pointer-events-none absolute top-8 bottom-8 left-[2.25rem] w-px -translate-x-1/2 bg-hairline md:left-[2.75rem]"
       />
 
-      <p className="relative z-10 col-start-1 text-center font-mono text-[0.68rem] tracking-[0.16em] text-muted uppercase">
+      <p className="label-meta relative z-10 col-start-1 text-center text-muted">
         {timelineStart}
       </p>
       <div />
@@ -83,7 +83,7 @@ export function ExperienceTimeline({
             <h3 className="text-xl font-medium tracking-tight text-foreground sm:text-2xl">
               {item.title}
             </h3>
-            <p className="mt-1 font-mono text-[0.72rem] tracking-[0.18em] text-star-bright uppercase">
+            <p className="label-meta mt-1 text-star-bright">
               {item.company}
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-muted">
@@ -104,7 +104,7 @@ export function ExperienceTimeline({
                 {item.stack}
               </p>
             ) : null}
-            <ul className="mt-4 list-disc space-y-1.5 pl-5 text-base leading-relaxed text-muted">
+            <ul className="mt-4 list-disc space-y-1.5 pl-5 text-body text-muted">
               {item.highlights.map((highlight) => (
                 <li key={highlight}>{highlight}</li>
               ))}
@@ -113,7 +113,7 @@ export function ExperienceTimeline({
         </Fragment>
       ))}
 
-      <p className="relative z-10 col-start-1 text-center font-mono text-[0.68rem] tracking-[0.16em] text-muted uppercase">
+      <p className="label-meta relative z-10 col-start-1 text-center text-muted">
         {timelineEnd}
       </p>
     </div>

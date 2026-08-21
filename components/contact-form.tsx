@@ -16,7 +16,7 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <p className="text-[1.05rem] leading-[1.75] text-muted">
+      <p className="text-body text-muted">
         {CONTACT_SECTION.success}
       </p>
     );

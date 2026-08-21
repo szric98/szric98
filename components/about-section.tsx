@@ -1,12 +1,10 @@
 import Image from "next/image";
+import { SectionHeading } from "@/components/section-heading";
 import { ABOUT_SECTION } from "@/copy";
 
 export function AboutSection() {
   return (
-    <section
-      id="about"
-      className="scroll-mt-28 px-8 py-12 md:px-16 lg:px-28 lg:py-16 xl:px-36"
-    >
+    <section id="about" className="page-gutter scroll-mt-28 py-12 lg:py-16">
       <div className="about-split">
         <div className="about-split__portrait-wrap">
           <div className="about-split__portrait">
@@ -14,7 +12,7 @@ export function AboutSection() {
               src="/about-richard.png"
               alt="Richard outdoors in Budapest"
               fill
-              sizes="(max-width: 759px) calc(100vw - 6rem), 30vw"
+              sizes="(max-width: 767px) calc(100vw - 6rem), 30vw"
               className="object-cover"
             />
             <span className="about-split__corner about-split__corner--tl" />
@@ -24,11 +22,7 @@ export function AboutSection() {
         </div>
 
         <div className="about-split__content">
-          <p className="kicker">{ABOUT_SECTION.title}</p>
-          <h2 className="mt-3 text-4xl font-medium tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl">
-            {ABOUT_SECTION.title}
-          </h2>
-          <div className="hairline mt-6" />
+          <SectionHeading title={ABOUT_SECTION.title} />
 
           <div className="about-split__copy">
             {ABOUT_SECTION.paragraphs.map((paragraph) => (
