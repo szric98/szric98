@@ -26,4 +26,4 @@ Classes: `.kicker`, `.label-meta`, `.page-gutter`, `.page-offset`. Headings: `Se
 <p className="label-meta text-star-bright">
 ```
 
-Tailwind: `text-label`, `text-body`, `tracking-display`. Breakpoints in custom CSS: `640` / `768` / `1024` / `1280` (plus `1440` only for the 6-col orbit).
+Tailwind: `text-label`, `text-body`, `tracking-display`. Breakpoints in custom CSS: `640` / `768` / `1024` / `1280` (plus `1536` only for the 6-col orbit).

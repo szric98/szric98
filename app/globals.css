@@ -492,24 +492,19 @@ body.star-cursor-active * {
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1536px) {
   .skills-orbit {
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1rem;
   }
 
   .skills-orbit__core span {
-    max-width: 4.5rem;
+    max-width: 5rem;
     padding: 0 0.25rem;
   }
 
   .skills-orbit__sat-face {
-    max-width: 4.5rem;
-  }
-
-  .skills-orbit__sat-face svg {
-    width: 1rem;
-    height: 1rem;
+    max-width: 5rem;
   }
 }
 
