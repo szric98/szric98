@@ -566,3 +566,86 @@ body.star-cursor-active * {
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   border-bottom: 1px solid var(--hairline);
 }
+
+.hero-enter,
+.reveal {
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ascend-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.35rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ascend-section {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 2.25rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-enter__item,
+.hero-enter__globe {
+  animation: ascend-in 0.8s var(--motion-ease) both;
+}
+
+.hero-enter__item:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.hero-enter__item:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.hero-enter__item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.hero-enter__item:nth-child(4) {
+  animation-delay: 0.28s;
+}
+.hero-enter__item:nth-child(5) {
+  animation-delay: 0.36s;
+}
+.hero-enter__item:nth-child(6) {
+  animation-delay: 0.44s;
+}
+
+.hero-enter__globe {
+  animation-duration: 1s;
+  animation-delay: 0.28s;
+}
+
+.reveal:not(.is-visible) .reveal__inner {
+  opacity: 0;
+}
+
+.reveal.is-visible .reveal__inner {
+  animation: ascend-section 0.85s var(--motion-ease) both;
+}
+
+@media (scripting: none) {
+  .reveal:not(.is-visible) .reveal__inner {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter__item,
+  .hero-enter__globe,
+  .reveal .reveal__inner {
+    animation: none;
+  }
+
+  .reveal:not(.is-visible) .reveal__inner {
+    opacity: 1;
+    transform: none;
+  }
+}

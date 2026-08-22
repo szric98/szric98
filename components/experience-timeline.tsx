@@ -70,7 +70,7 @@ export function ExperienceTimeline({
     <div className="relative grid grid-cols-[4.75rem_0.75rem_minmax(0,1fr)] gap-y-12 md:grid-cols-[6rem_1.25rem_minmax(0,1fr)]">
       <div
         aria-hidden="true"
-        className="experience-stations__spine pointer-events-none absolute top-10 bottom-10 left-[2.375rem] w-0.5 -translate-x-1/2 md:left-[3rem]"
+        className="experience-stations__spine pointer-events-none absolute top-10 bottom-10 left-9.5 w-0.5 -translate-x-1/2 md:left-12"
       />
 
       {items.map((item) => {
