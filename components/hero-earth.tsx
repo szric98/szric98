@@ -268,7 +268,7 @@ function EarthLiveCaption() {
       <span className="text-muted/50"> · </span>
       <span className="inline-flex items-center gap-1.5 text-star-bright">
         <span
-          className="size-1.5 shrink-0 rounded-full bg-accent"
+          className="size-1.5 shrink-0 rounded-full bg-red-600"
           aria-hidden
         />
         LIVE

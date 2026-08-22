@@ -83,8 +83,6 @@ export const SKILLS_SECTION = {
 
 export const EXPERIENCE_SECTION = {
   title: "Experience",
-  timelineStart: "Present",
-  timelineEnd: "2021",
   items: [
     {
       title: "Full-stack Software Engineer",
@@ -92,6 +90,8 @@ export const EXPERIENCE_SECTION = {
       startDate: "Apr 2024",
       endDate: "present",
       location: "London, United Kingdom (remote)",
+      logo: "/logos/plandek.png",
+      brand: "#FF4600",
       highlights: [
         "Contributed to a software intelligence platform handling large volumes of customer data across multiple engineering teams",
         "Helped rewrite and modernize the UI, which was very well received by clients",
@@ -109,6 +109,8 @@ export const EXPERIENCE_SECTION = {
       startDate: "Apr 2023",
       endDate: "Apr 2024",
       location: "Budapest, Hungary (remote)",
+      logo: "/logos/jobrecord.png",
+      brand: "#E57A24",
       stack: "React, TypeScript, Next.js, Vercel, Capacitor, Axios, Formik",
       highlights: [
         "Was entrusted with taking over and fixing the codebase of a job-search website",
@@ -125,6 +127,8 @@ export const EXPERIENCE_SECTION = {
       startDate: "Nov 2021",
       endDate: "Mar 2023",
       location: "London, United Kingdom (remote)",
+      logo: "/logos/bindruk.png",
+      brand: "#E8E8E8",
       stack:
         "React, Typescript, Jest, Node, Apollo GraphQL, Material UI, Express, MongoDB, Flutter",
       highlights: [

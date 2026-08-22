@@ -37,12 +37,8 @@ export default function Home() {
       <SkillsSection />
 
       <PageSection id="experience" title={EXPERIENCE_SECTION.title}>
-        <div className="max-w-3xl">
-          <ExperienceTimeline
-            timelineStart={EXPERIENCE_SECTION.timelineStart}
-            timelineEnd={EXPERIENCE_SECTION.timelineEnd}
-            items={EXPERIENCE_SECTION.items}
-          />
+        <div className="max-w-4xl">
+          <ExperienceTimeline items={EXPERIENCE_SECTION.items} />
         </div>
       </PageSection>
 
@@ -56,9 +52,7 @@ export default function Home() {
               <h3 className="text-xl font-medium tracking-tight text-foreground">
                 {project.title}
               </h3>
-              <p className="mt-3 text-body text-muted">
-                {project.description}
-              </p>
+              <p className="mt-3 text-body text-muted">{project.description}</p>
               <p className="label-meta mt-4 text-star-bright">
                 {project.stack}
               </p>
